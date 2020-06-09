@@ -1,3 +1,4 @@
+
 /**
  * define all layers
  */
@@ -629,23 +630,42 @@ var landuse_water_label = new ol.layer.Tile({
 var time = '2020-4-12T18:00:00.0Z'; 
 var test_tile = new ol.layer.Tile({
 	source : new ol.source.TileWMS({
-		url : 'http://141.45.146.200:8585/geoserver/geotest/wms',
-		params : {
-			'LAYERS' : 'geotest:GeoHTW',
-			'FORMAT' : 'image/png',
-			'VERSION' : '1.1.1',
-			'TRANSPARENT' : 'true',
-			'TIME': time
-		},
+	    url : 'http://ohm.f4.htw-berlin.de:8585/geoserver/berlinalpha/wms',
+	        params : {
+				'LAYERS' :'berlinalpha:berlinalpha',
+				'FORMAT' : 'image/png',
+				'VERSION' :'1.1.1',
+				'TRANSPARENT' :'true',
+				'TIME': time,
+				'srs':'EPSG:3857'
+	        },
 		serverType: 'geoserver'
 	})
 });
+
+let vector = new ol.layer.Vector({
+	source: new ol.source.Vector(),
+	style: new ol.style.Style({
+      fill: new ol.style.Fill({
+        color: 'rgba(255, 255, 255, 0.2)'
+      }),
+      stroke: new ol.style.Stroke({
+        color: '#ffcc33',
+        width: 2
+      }),
+    })
+});
+
+
 
 /**
  * layers into layer-group
  */
 
 var layers = new ol.layer.Group({
-	layers : [test_tile]
+	layers : [
+		test_tile,
+		vector
+	]
 })
 
