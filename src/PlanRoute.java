@@ -73,7 +73,8 @@ public class PlanRoute extends HttpServlet {
 		
 		
 		String timeResult = "42";
-		HttpPost post = new HttpPost("http://localhost:8080/ohdm");
+		/* HttpPost post = new HttpPost("http://localhost:8080/ohdm");*/
+		HttpPost post = new HttpPost("http://localhost:5555/ohdm_traveler");
 		StringEntity stringEntity = new StringEntity(jsonRequest.toJSONString());	
 		
 		post.setEntity(stringEntity);
