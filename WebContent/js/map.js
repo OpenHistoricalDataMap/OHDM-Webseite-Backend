@@ -1,3 +1,6 @@
+
+
+
 /** * Scaleline ** */
 var scaleLineControl = new ol.control.ScaleLine();
 
@@ -38,14 +41,14 @@ var mousePositionControl = new ol.control.MousePosition({
  * map view
  */
 var view = new ol.View({
-	projection : 'EPSG:3857',
-	center : ol.proj.transform([ 13.51370, 52.46 ], 'EPSG:4326', 'EPSG:3857'),
+	projection : 'EPSG:4326',
+	center : ol.proj.transform([ 13.51370, 52.46 ], 'EPSG:4326', 'EPSG:4326'),
 	zoom : 14
 });
 
 /** * map ** */
 var map = new ol.Map({
-	layers : layers,
+	layers :  layers,
 	loadTilesWhileAnimating : true,
 	interactions : interactions,
 	target : 'map',
@@ -58,3 +61,39 @@ var map = new ol.Map({
 	loadTilesWhileAnimating : true,
 	renderer : 'canvas'
 });
+
+function moveend(evt) {	
+	console.log(map.getView().calculateExtent(map.getSize()));
+	var coordinates = map.getView().calculateExtent(map.getSize());
+	document.getElementById('max-lat').value = parseFloat(coordinates[3]).toFixed(6);
+	document.getElementById('min-lat').value = parseFloat(coordinates[1]).toFixed(6);
+	
+	document.getElementById('max-lon').value = parseFloat(coordinates[2]).toFixed(6);
+	document.getElementById('min-lon').value = parseFloat(coordinates[0]).toFixed(6);
+
+}
+
+/*  */
+this.map.on('moveend', moveend())
+
+
+
+/* Drawing Feature for Export */
+var draw; // global so we can remove it later
+function addInteraction() {
+    draw = new ol.interaction.Draw({
+      source: layers.getLayers().get("vector"),
+      type: "Polygon"
+    });
+
+	draw.on('drawend', function(evt) { 
+		var coordinates = evt.feature.getGeometry().getCoordinates();
+		console.log(coordinates);
+		map.removeInteraction(draw)
+	});
+
+    map.addInteraction(draw);
+}
+
+
+

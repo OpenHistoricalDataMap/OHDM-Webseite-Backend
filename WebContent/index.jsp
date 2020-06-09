@@ -443,7 +443,12 @@
 
 						</div>
 						<div class="row">
-							<button onclick="exportMap()" type="button"
+							<button onclick="addInteraction()" type="button"
+								class="btn btn-light apply-time col-12">eigenen Bereich wählen</button>
+						</div>
+						<p>
+						<div class="row">
+							<button onclick="exportMap" type="button"
 								class="btn btn-light apply-time col-12">übernehmen</button>
 						</div>
 						<div class="side-menu-content">
@@ -478,6 +483,7 @@
 	<script src="js/route.js"></script>
 	<script src="js/date.js"></script>
 	<script src="js/travelTime.js"></script>
+	<script src="js/export.js"></script>
 
 
 
