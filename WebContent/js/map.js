@@ -29,7 +29,7 @@ var mousePositionControl = new ol.control.MousePosition({
 		;
 		return (coord[1] + ', ' + coord[0]);
 	},
-	projection : 'EPSG:4326',
+	projection : 'EPSG:3857',
 	className : 'custom-mouse-position',
 	undefinedHTML : '&nbsp;'
 });
@@ -38,9 +38,9 @@ var mousePositionControl = new ol.control.MousePosition({
  * map view
  */
 var view = new ol.View({
-	projection : 'EPSG:4326',
-	center : ol.proj.transform([ 13.51370, 52.46 ], 'EPSG:4326', 'EPSG:4326'),
-	zoom : 14
+	projection : 'EPSG:3857',
+	center : ol.proj.transform([ 13.545, 52.46 ], 'EPSG:4326', 'EPSG:3857'),
+	zoom : 12
 });
 
 /** * map ** */

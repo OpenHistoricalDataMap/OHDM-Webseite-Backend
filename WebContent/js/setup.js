@@ -1,8 +1,8 @@
 var d = new Date();
 //default date is current date; will be updated if url-parameter is set
-var selectedDate = [ d.getFullYear(), d.getMonth() + 1, d.getDate() ]; // YYYY MM DD (today)
+var selectedDate = [d.getFullYear(), d.getMonth() + 1, d.getDate()]; // YYYY MM DD (today)
 //date range in years, for filterfunction (here 1900-current year)
-var dateRange = [ 1900, d.getFullYear() ]; // [minYear, currentYear]
+var dateRange = [1800, d.getFullYear()]; // [minYear, currentYear]
 var date; // date String created out of selectedDate;
 
 /*
@@ -18,9 +18,9 @@ var closeMenu = $(".close-menu");
  * Time Select HTML; used in setup.js, updateTime.js
  */
 var applyTimeBtn = $(".apply-time");
-var selectYearBox = $(".select-year");
-var selectMonthBox = $(".select-month");
-var selectDayBox = $(".select-day");
+var selectYearBox = $("#year-select");
+var selectMonthBox = $("#month-select");
+var selectDayBox = $("#day-select");
 
 /*
  * Search controls HTML; used in: geocoding.js
@@ -30,6 +30,8 @@ var searchControllInput = $("#search-controll-input");
 var searchControllResultsList = $(".search-controll-results-list");
 var searchControllEntry = ".search-controll-entry";
 
+var resetBtn = document.getElementById("resetTime");
+var timeButton = document.getElementById("getTime");
 /*
  * dummy cql-filter string for layers to filter by date
  */
@@ -84,11 +86,11 @@ function fillDateSelect(selectBox, min, max, selected) {
 	selectBox.html("");
 	for (var i = min; i <= max; i++) {
 		if (i == selected) {
-			selectBox.append("<option selected value=\"" + i + "\">"
-					+ dayOrMonthToString(i) + "</option>");
+			selectBox.append("<option selected value=\"" + i + "\">" +
+				dayOrMonthToString(i) + "</option>");
 		} else {
-			selectBox.append("<option value=\"" + i + "\">"
-					+ dayOrMonthToString(i) + "</option>");
+			selectBox.append("<option value=\"" + i + "\">" +
+				dayOrMonthToString(i) + "</option>");
 		}
 	}
 }
@@ -134,29 +136,12 @@ function getDateParam() {
 	// and length of 3) and if its between dateRange
 	if (dateParam) {
 		var tmpDate = dateParam.split('-').map(Number);
-		if (!tmpDate.some(isNaN) && tmpDate.length == 3
-				&& tmpDate[0] >= dateRange[0] && tmpDate[0] <= dateRange[1]) {
+		if (!tmpDate.some(isNaN) && tmpDate.length == 3 &&
+			tmpDate[0] >= dateRange[0] && tmpDate[0] <= dateRange[1]) {
 			selectedDate = tmpDate;
 		}
 	}
 }
-
-/*
-*
-___________________________________________________________________________________________________________________
-___________________________________________________________________________________________________________________
-*
-*/
-
-//get time of html documents and change params /-OCHIR
-function getTimeAndUpdateMap(){
-	var year = document.getElementById("year-select").value;
-	var dateSelect = year + "-" + selectMonthBox.val() + "-" + selectDayBox.val(); // creates "YYYY-MM-DD"
-	test_tile.getSource().updateParams({'TIME': new Date(dateSelect).toISOString()});
-	console.log(new Date(dateSelect).toISOString());
-}
-var timeButton = document.getElementById("getTime");
-timeButton.addEventListener('click', getTimeAndUpdateMap, false);
 
 /**
  * 
@@ -169,8 +154,8 @@ timeButton.addEventListener('click', getTimeAndUpdateMap, false);
 //gets date Params if 'date'-url-param is given
 getDateParam();
 //creates date string
-date = selectedDate[0] + "-" + dayOrMonthToString(selectedDate[1]) + "-"
-		+ dayOrMonthToString(selectedDate[2]); // creates "YYYY-MM-DD"
+date = selectedDate[0] + "-" + dayOrMonthToString(selectedDate[1]) + "-" +
+	dayOrMonthToString(selectedDate[2]); // creates "YYYY-MM-DD"
 //console.log(date);
 //creates cql filter for layer depending on date string
 cqlTimeFilter = cqlTemplateTimeFilter.replace(new RegExp('{{DATE}}', 'g'), date);
@@ -182,17 +167,47 @@ fillDateSelect(selectYearBox, dateRange[0], dateRange[1], selectedDate[0]);
 fillDateSelect(selectMonthBox, 1, 12, selectedDate[1]);
 // fills day select
 fillDateSelect(selectDayBox, 1, daysInMonth(selectedDate[1], selectedDate[0]),
-		selectedDate[2]);
+	selectedDate[2]);
 
 // changes days of month if selectMonthBox is changed
-selectMonthBox.on('change', function(e) {
+selectMonthBox.on('change', function (e) {
 	fillDateSelect(selectDayBox, 1, daysInMonth(selectMonthBox.val(),
-			selectYearBox.val()), getMaxDayForSelect(selectMonthBox.val(),
-			selectYearBox.val(), selectDayBox.val()));
+		selectYearBox.val()), getMaxDayForSelect(selectMonthBox.val(),
+		selectYearBox.val(), selectDayBox.val()));
 });
 // changes days of month if selectYearBox is changed
-selectYearBox.on('change', function(e) {
+selectYearBox.on('change', function (e) {
 	fillDateSelect(selectDayBox, 1, daysInMonth(selectMonthBox.val(),
-			selectYearBox.val()), getMaxDayForSelect(selectMonthBox.val(),
-			selectYearBox.val(), selectDayBox.val()));
+		selectYearBox.val()), getMaxDayForSelect(selectMonthBox.val(),
+		selectYearBox.val(), selectDayBox.val()));
 });
+//get time of html documents and change params
+function getTimeAndUpdateMap() {
+	//var year = document.getElementById("year-select").value;
+	var dateSelect = selectYearBox.val() + "-" + selectMonthBox.val() + "-" + selectDayBox.val(); // creates "YYYY-MM-DD"
+	test_tile.getSource().updateParams({
+		'TIME': new Date(dateSelect).toISOString()
+	});
+	console.log("update time called: " + new Date(dateSelect).toISOString())
+}
+
+timeButton.addEventListener('click', getTimeAndUpdateMap, false);
+
+//reset button
+resetBtn.onclick = function () {
+	// YYYY MM DD (today a month ago)
+	// because database is not updated daily? 
+	//var date = [d.getFullYear(), d.getMonth(), d.getDate()];
+	test_tile.getSource().updateParams({
+		'TIME': time
+	});
+
+	// fills year select
+	fillDateSelect(selectYearBox, dateRange[0], dateRange[1], selectedDate[0]);
+	// fills month select
+	fillDateSelect(selectMonthBox, 1, 12, selectedDate[1]);
+	// fills day select
+	fillDateSelect(selectDayBox, 1, daysInMonth(selectedDate[1], selectedDate[0]),
+		selectedDate[2]);
+	console.log("update time called: " + time);
+}

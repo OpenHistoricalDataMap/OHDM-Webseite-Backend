@@ -627,7 +627,7 @@ var landuse_water_label = new ol.layer.Tile({
 });
 */
 
-var time = '2020-4-12T18:00:00.0Z'; 
+var time = '2020-5-13T18:00:00.0Z'; 
 var test_tile = new ol.layer.Tile({
 	source : new ol.source.TileWMS({
 	    url : 'http://ohm.f4.htw-berlin.de:8585/geoserver/berlinalpha/wms',
@@ -637,7 +637,7 @@ var test_tile = new ol.layer.Tile({
 				'VERSION' :'1.1.1',
 				'TRANSPARENT' :'true',
 				'TIME': time,
-				'srs':'EPSG:3857'
+				//'srs':'EPSG:3857'
 	        },
 		serverType: 'geoserver'
 	})
