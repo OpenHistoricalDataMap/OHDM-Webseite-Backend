@@ -429,43 +429,45 @@
 						<h5>Karte exportieren</h5>
 					</div>
 					<div class="side-menu-content">
-	
-						<div class="container">
-							<div class="row">
-								<div class="form-export-container">
-									<form id="form-export" action="">
-										<input type="text" name="max-lat" class="form-control col-5 form-export-entry " id="max-lat">
-										<br style="height: 2rem;"> 
-										<input type="text" name="min-lon" class="form-control col-5 form-export-entry "id="min-lon"> 
-											<input type="text" name="max-lon" class="form-control col-5 form-export-entry " id="max-lon">
-										<br style="height: 2rem;"> 
-										<br style="height: 2rem;">
-										<br style="height: 2rem;"> 
-										<input type="text" name="min-lat" class="form-control col-5 form-export-entry" id="min-lat">
-									</form>
-								</div>
-	
+
+					<div class="container">
+						<div class="row">
+							<div class="form-export-container">
+								<form id="form-export" action="">
+									<input type="text" name="max-lat" class="form-control col-5 form-export-entry " id="max-lat" readonly>
+									<br style="height: 2rem;"> 
+									<input type="text" name="min-lon" class="form-control col-5 form-export-entry "id="min-lon" readonly> 
+									<input type="text" name="max-lon" class="form-control col-5 form-export-entry " id="max-lon" readonly>
+									<br style="height: 2rem;">
+									<br style="height: 2rem;"> 
+									<br style="height: 2rem;"> 
+									<br style="height: 2rem;"> 
+									<input type="text" name="min-lat" class="form-control col-5 form-export-entry" id="min-lat" readonly>
+								</form>
 							</div>
-							<div class="row">
-								<button onclick="addInteraction()" type="button"
-									class="btn btn-light apply-time col-12">eigenen Bereich wählen</button>
-							</div>
-							<p>
-							<div class="row">
-								<button onclick="exportMap" type="button"
-									class="btn btn-light apply-time col-12">übernehmen</button>
-							</div>
-							<div class="side-menu-content">
-								Hier können Sie Karten exportieren, diese stehen dann auch für
-								den <a href="">Android Offline Viewer</a> verfügbar.
-							</div>
-							<div class="row">
-								<button onclick="exportMap()" type="button"
-									class="btn btn-light apply-time col-12">Bereits
-									exportierte Karten</button>
-							</div>
+							<p style="font-size: x-small;">Wenn Sie den kompletten sichtbaren Bereich exportieren möchten, drücken Sie auf Exportieren.</p>
+
+						</div>
+						<div class="row">
+							<button onclick="addInteraction()" type="button"
+								class="btn btn-light apply-time col-12">Eigenen Bereich wählen</button>
+						</div>
+						<p>
+						<div class="row">
+							<button onclick="exportMap" type="button"
+								class="btn btn-light apply-time col-12">Exportieren</button>
+						</div>
+						<div class="side-menu-content">
+							Hier können Sie Karten exportieren, diese stehen dann auch für
+							den <a href="">Android Offline Viewer</a> verfügbar.
+						</div>
+						<div class="row">
+							<button onclick="exportMap()" type="button"
+								class="btn btn-light apply-time col-12">Bereits
+								exportierte Karten</button>
 						</div>
 					</div>
+				</div>
 				</div>
 			</div>
 		</div>
