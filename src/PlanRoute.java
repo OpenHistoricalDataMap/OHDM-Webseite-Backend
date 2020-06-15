@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -48,10 +49,26 @@ public class PlanRoute extends HttpServlet {
 		
 		String waterwayIncluded = request.getParameter("waterwayincl");
 		
-		String startLatitude = request.getParameter("start-lat");
-		String startLongitude = request.getParameter("start-lon");
-		String endPointLatitude = request.getParameter("ziel-lat");
-		String endPointLongitude = request.getParameter("ziel-lon");
+		String startCoord = request.getParameter("start");
+		String targetCoord = request.getParameter("target");
+		
+		String startLatitude = "00.00000";
+		String startLongitude = "00.00000";
+		
+		String targetLatitude = "00.00000";
+		String targetLongitude = "00.00000";
+		
+		if(startCoord.length() > 8) {
+			String[] startPoints = startCoord.split("\\,");
+			startLatitude = startPoints[0].substring(0,8);
+			startLongitude = startPoints[1].substring(1,9);
+		}
+		
+		if(targetCoord.length() > 8) {
+			String[] targetPoints = targetCoord.split("\\,");
+			targetLatitude = targetPoints[0].substring(0,8);
+			targetLongitude = targetPoints[1].substring(1,9);
+		}
 		
 		if(waterwayIncluded != null){
 			waterwayIncluded = "true";
@@ -62,18 +79,18 @@ public class PlanRoute extends HttpServlet {
 		jsonRequest.put("classofperson", classOfPerson);
 		jsonRequest.put("transporttype", transportType);
 		jsonRequest.put("waterwayincl", waterwayIncluded);
-		jsonStartPoint.put("latitude",startLatitude);
+		jsonStartPoint.put("latitude", startLatitude);
 		jsonStartPoint.put("longitude", startLongitude);
 		jsonRequest.put("startpoint", jsonStartPoint);
-		jsonEndPoint.put("latitude",endPointLatitude);
-		jsonEndPoint.put("longitude", endPointLongitude);
+		jsonEndPoint.put("latitude",targetLatitude);
+		jsonEndPoint.put("longitude", targetLongitude);
 		jsonRequest.put("endpoint", jsonEndPoint);
 		jsonRequest.put("day", "2019-9-9");
 		jsonRequest.put("restricted_area", restrictedArea);
 		
 		
 		String timeResult = "42";
-		/* HttpPost post = new HttpPost("http://localhost:8080/ohdm");*/
+		//HttpPost post = new HttpPost("http://localhost:8080/ohdm");
 		HttpPost post = new HttpPost("http://localhost:5555/ohdm_traveler");
 		StringEntity stringEntity = new StringEntity(jsonRequest.toJSONString());	
 		
@@ -104,7 +121,7 @@ public class PlanRoute extends HttpServlet {
 		
 		
 	    
-	    request.setAttribute("time", timeResult); // This will be available as ${message}
+	    request.setAttribute("time", timeResult.substring(16,24)); // This will be available as ${message}
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 	

@@ -367,19 +367,10 @@
 					<form action="PlanRoute" method="post"> 
 						<div class="container">
 							<div class="row">
-								<input style="margin-bottom: 10px;" type="text"
-									class="form-control col-6" name="start-lat"
-									placeholder="Latitude" id="route-start-control-lat-input">
-								<input style="margin-bottom: 10px;" type="text"
-									class="form-control col-6" name="start-lon"
-									placeholder="Longitude" id="route-start-control-lon-input">
-								<input style="margin-bottom: 10px;" type="text"
-									class="form-control col-6" name="ziel-lat"
-									placeholder="Latitude" id="route-target-control-lat-input">
-								<input style="margin-bottom: 10px;" type="text"
-									class="form-control col-6" name="ziel-lon"
-									placeholder="Longitude" id="route-target-control-lon-input">
-
+								<input type="text" style="margin-bottom: 10px;" onclick="addPoint(true)" id="start" name="start" type="button"
+								class="btn btn-light apply-time col-12 coordinate-content" value="Start"></button>
+								<input type="text" style="margin-bottom: 10px;" onclick="addPoint(false)" id="target" name="target" type="button"
+								class="btn btn-light apply-time col-12 coordinate-content" value="Ziel" ></button>
 								<select style="margin-bottom: 10px;" id="class-of-person"
 									name="class-of-person"
 									class="custom-select col-12 custom-select">
@@ -428,16 +419,14 @@
 						<div class="row">
 							<div class="form-export-container">
 								<form id="form-export" action="">
-									<input type="text" name="max-lat"
-										class="form-control col-5 form-export-entry " id="max-lat">
-									<br style="height: 2rem;"> <input type="text"
-										name="min-lon" class="form-control col-5 form-export-entry "
-										id="min-lon"> <input type="text" name="max-lon"
-										class="form-control col-5 form-export-entry " id="max-lon">
-									<br style="height: 2rem;"> <br style="height: 2rem;">
-									<br style="height: 2rem;"> <input type="text"
-										name="min-lat" class="form-control col-5 form-export-entry"
-										id="min-lat">
+									<input type="text" name="max-lat" class="form-control col-5 form-export-entry " id="max-lat">
+									<br style="height: 2rem;"> 
+									<input type="text" name="min-lon" class="form-control col-5 form-export-entry "id="min-lon"> 
+										<input type="text" name="max-lon" class="form-control col-5 form-export-entry " id="max-lon">
+									<br style="height: 2rem;"> 
+									<br style="height: 2rem;">
+									<br style="height: 2rem;"> 
+									<input type="text" name="min-lat" class="form-control col-5 form-export-entry" id="min-lat">
 								</form>
 							</div>
 

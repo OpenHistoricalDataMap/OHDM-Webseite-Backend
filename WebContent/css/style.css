@@ -387,34 +387,46 @@ media queries
 	margin-bottom: 1rem;
 	width: 100%;
 	height: auto;
-	border: solid rgb(89, 139, 2) 1px;
-	background-color: rgba(118, 185, 0, 1);
+	background-color: lightgray;
 }
 
 
 #max-lat{
 	margin: auto;
 	margin-top: 0.4rem;
-
+	background-color: lightgray;
+	text-align: center;
+	font-size: x-small;
+	border: none;
 }
 
 #min-lat{
 	margin: auto;
 	margin-bottom: 0.4rem;
-
+	background-color: lightgray;
+	text-align: center;
+	font-size: x-small;
+	border: none;
 }
 
 #max-lon{
 	margin: auto;
 	float: right;
 	margin-right: 0.4rem;
+	background-color: lightgray;
+	text-align: center;
+	font-size: x-small;
+	border: none;
 }
 
 #min-lon{
 	margin: auto;
 	float: left;
 	margin-left: 0.4rem;
-
+	background-color: lightgray;
+	text-align: center;
+	font-size: x-small;
+	border: none;
 }
 
 
