@@ -29,7 +29,7 @@ var mousePositionControl = new ol.control.MousePosition({
 		;
 		return (coord[1] + ', ' + coord[0]);
 	},
-	projection : 'EPSG:3857',
+	projection : 'EPSG:4326',
 	className : 'custom-mouse-position',
 	undefinedHTML : '&nbsp;'
 });
@@ -39,9 +39,10 @@ var mousePositionControl = new ol.control.MousePosition({
  */
 var view = new ol.View({
 	projection : 'EPSG:3857',
-	center : ol.proj.transform([ 13.545, 52.46 ], 'EPSG:4326', 'EPSG:3857'),
+	center : ol.proj.transform([ 13.40, 52.52 ], 'EPSG:4326', 'EPSG:3857'),
 	zoom : 12
 });
+
 
 /** * map ** */
 var map = new ol.Map({
@@ -65,12 +66,20 @@ var map = new ol.Map({
 function moveend(evt) {	
 	console.log(map.getView().calculateExtent(map.getSize()));
 	var coordinates = map.getView().calculateExtent(map.getSize());
-	document.getElementById('max-lat').value = parseFloat(coordinates[3]).toFixed(2);
-	document.getElementById('min-lat').value = parseFloat(coordinates[1]).toFixed(2);
+	console.log(coordinates);
 	
-	document.getElementById('max-lon').value = parseFloat(coordinates[2]).toFixed(2);
-	document.getElementById('min-lon').value = parseFloat(coordinates[0]).toFixed(2);
-
+	var coordinatesMax = ol.proj.transform([parseFloat(coordinates[2]), parseFloat(coordinates[3])], 'EPSG:3857', 'EPSG:4326');
+	
+	var coordinatesMin = ol.proj.transform([parseFloat(coordinates[0]), parseFloat(coordinates[1])], 'EPSG:3857', 'EPSG:4326');
+	
+	
+	
+	document.getElementById('max-lat').value = coordinatesMax[0].toFixed(2);
+	document.getElementById('min-lat').value = coordinatesMin[0].toFixed(2);
+	
+	document.getElementById('max-lon').value = coordinatesMin[1].toFixed(2);
+	document.getElementById('min-lon').value = coordinatesMax[1].toFixed(2);
+	
 }
 
 /*  */
@@ -79,7 +88,8 @@ this.map.on('moveend', moveend())
 
 
 /* Drawing Feature for Export */
-var draw; 
+var draw;
+var coordinatesPolygon = [];
 function addInteraction() {
     draw = new ol.interaction.Draw({
       source: layers.getLayers().get("vector"),
@@ -87,9 +97,16 @@ function addInteraction() {
     });
 
 	draw.on('drawend', function(evt) { 
-		var coordinates = evt.feature.getGeometry().getCoordinates();
-		console.log(coordinates);
+		
+		var coordinates3857 = evt.feature.getGeometry().getCoordinates();
+		console.log(coordinates3857[0].length);
+		
+		for (let i = 0; i < coordinates3857[0].length; i++) {
+			const element = coordinates3857[0][i];
+			coordinatesPolygon.push(ol.proj.transform(element, 'EPSG:3857', 'EPSG:4326'));
+		}
 		map.removeInteraction(draw)
+		
 	});
 
     map.addInteraction(draw);
@@ -104,7 +121,7 @@ function addPoint(startOrTarget) {
     });
 
 	drawPoint.on('drawend', function(evt) { 
-		var coordinates = evt.feature.getGeometry().getCoordinates();
+		var coordinates = ol.proj.transform(evt.feature.getGeometry().getCoordinates(), 'EPSG:3857', 'EPSG:4326');
 		if(startOrTarget){
 			document.querySelector('#start').value = formatCoords(coordinates);
 		} else {

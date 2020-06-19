@@ -629,8 +629,8 @@ var landuse_water_label = new ol.layer.Tile({
 var time = '2020-5-13T18:00:00.0Z';
 
 var projExtent = ol.proj.get('EPSG:3857').getExtent();
-var startResolution = ol.extent.getWidth(projExtent) / 256;
-    console.log("startResolution:", startResolution);
+var startResolution = ol.extent.getWidth(projExtent) / 256; 
+	console.log("startResolution:", startResolution);
 var resolutions = new Array(18);
 for (var i = 0, ii = resolutions.length; i < ii; ++i) {
     resolutions[i] = startResolution / Math.pow(2, i);
@@ -654,7 +654,7 @@ var test_tile = new ol.layer.Tile({
 			'VERSION': '1.1.1',
 			'TIME': time,
 			'TRANSPARENT': 'true'
-			
+				
 		},
 		serverType: 'geoserver',
 		tileGrid : tileGrid
@@ -674,6 +674,10 @@ let vector = new ol.layer.Vector({
       }),
     })
 });
+
+/**
+ * layers into layer-group
+ */
 
 var layers = new ol.layer.Group({
 	layers: [test_tile, vector]

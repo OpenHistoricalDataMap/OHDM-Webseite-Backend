@@ -181,10 +181,12 @@ selectYearBox.on('change', function (e) {
 		selectYearBox.val()), getMaxDayForSelect(selectMonthBox.val(),
 		selectYearBox.val(), selectDayBox.val()));
 });
+
+var dateSelect = '2020-05-13';
 //get time of html documents and change params
 function getTimeAndUpdateMap() {
 	//var year = document.getElementById("year-select").value;
-	var dateSelect = selectYearBox.val() + "-" + selectMonthBox.val() + "-" + selectDayBox.val(); // creates "YYYY-MM-DD"
+	dateSelect = selectYearBox.val() + "-" + selectMonthBox.val() + "-" + selectDayBox.val(); // creates "YYYY-MM-DD"
 	test_tile.getSource().updateParams({
 		'TIME': new Date(dateSelect).toISOString()
 	});
