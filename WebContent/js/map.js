@@ -45,6 +45,8 @@ var view = new ol.View({
 
 /** * map ** */
 var map = new ol.Map({
+	projection : 'EPSG:3857',
+	pixelRatio: 1,
 	layers : layers,
 	loadTilesWhileAnimating : true,
 	interactions : interactions,

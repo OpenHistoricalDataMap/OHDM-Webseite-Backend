@@ -24611,7 +24611,7 @@ Licensed under CC-BY-3.0.
           switch (a.U) {
           case "geoserver":
               d = 90 * d + .5 | 0;
-              f.FORMAT_OPTIONS = "FORMAT_OPTIONS"in f ? f.FORMAT_OPTIONS + (";dpi:" + d) : "dpi:" + d;
+              //f.FORMAT_OPTIONS = "FORMAT_OPTIONS"in f ? f.FORMAT_OPTIONS + (";dpi:" + d) : "dpi:" + d;
               break;
           case "mapserver":
               f.MAP_RESOLUTION = 90 * d;
@@ -25594,7 +25594,7 @@ Licensed under CC-BY-3.0.
               switch (a.B) {
               case "geoserver":
                   c = 90 * e + .5 | 0;
-                  g.FORMAT_OPTIONS = "FORMAT_OPTIONS"in g ? g.FORMAT_OPTIONS + (";dpi:" + c) : "dpi:" + c;
+                  //g.FORMAT_OPTIONS = "FORMAT_OPTIONS"in g ? g.FORMAT_OPTIONS + (";dpi:" + c) : "dpi:" + c;
                   break;
               case "mapserver":
                   g.MAP_RESOLUTION = 90 * e;
