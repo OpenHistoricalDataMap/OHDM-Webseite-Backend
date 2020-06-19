@@ -446,15 +446,18 @@
 								</form>
 							</div>
 							<p style="font-size: x-small;">Wenn Sie den kompletten sichtbaren Bereich exportieren möchten, drücken Sie auf Exportieren.</p>
-
 						</div>
+						
 						<div class="row">
 							<button onclick="addInteraction()" type="button"
 								class="btn btn-light apply-time col-12">Eigenen Bereich wählen</button>
 						</div>
 						<p>
 						<div class="row">
-							<button onclick="exportMap" type="button"
+							<input type="text" id="export-name" class="form-control col-12" style="margin-bottom: 20px;" placeholder="Name" >
+						</div>
+						<div class="row">
+							<button onclick="exportMap()" id="export-button" type="button"
 								class="btn btn-light apply-time col-12">Exportieren</button>
 						</div>
 						<div class="side-menu-content">
@@ -462,7 +465,7 @@
 							den <a href="">Android Offline Viewer</a> verfügbar.
 						</div>
 						<div class="row">
-							<button onclick="exportMap()" type="button"
+							<button onclick="getStatus()" type="button"
 								class="btn btn-light apply-time col-12">Bereits
 								exportierte Karten</button>
 						</div>
