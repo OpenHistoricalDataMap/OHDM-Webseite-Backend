@@ -325,10 +325,17 @@
 							src="ressources/icons/cross.svg" alt="Schließen"></span>
 						<h5>Layers</h5>
 					</div>
-					<div class="side-menu-content">Hier könnte es verschiedene
-						Basemaps zur Auswahl geben, wenn es evtl. bald mehrere Styles gibt.</div>
+					<div class="side-menu-content">
+						<div class="row">
+							<button class="btn btn-light basemap disabled-basemap col-12" id="mapnik">GeoServer</button>
+						</div>
+						<div class="row">
+							 <button class="btn btn-light basemap disabled-basemap col-12" id="mapnik" disabled>Mapnik</button>
+						</div>
+					</div>
+
 				</div>
-	
+				
 				<!-- layer menu -->
 				<div id="legend-menu">
 					<div class="side-menu-heading">
