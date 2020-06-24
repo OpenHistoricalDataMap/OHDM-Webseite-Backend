@@ -37,10 +37,12 @@ public class ExportRequest extends HttpServlet {
 		String name = "defaultName";
 		String polygon = "52.0,13.0_52.0,14.0_53.0,14.0_53.0,13.0_52.0,13.0";
 		String date = "2020-05-13";
+		String datatype = "OSM";
 		
 		name = request.getParameter("name");
 		polygon = request.getParameter("polygon");
 		date = request.getParameter("date");
+		datatype = request.getParameter("datatype");
 		
 		String resultID = "42";
 		
@@ -71,6 +73,7 @@ public class ExportRequest extends HttpServlet {
 			System.err.println("Stream not available.");
 			e.printStackTrace();
 		}
+		/*
 		
 		PrintWriter writer;
 		if(request.getParameter("status").equals("true")) {
@@ -93,15 +96,10 @@ public class ExportRequest extends HttpServlet {
 				System.err.println("writer is null");
 			}
 		}
+		*/
 		
-		
-		
-		
-		
-		
-		
-		
-		
+		request.setAttribute("exportStatus", "hi there");
+		request.getRequestDispatcher("/status.jsp").forward(request, response);
 		
 	}
 

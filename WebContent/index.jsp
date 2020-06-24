@@ -457,6 +457,17 @@
 							<input type="text" id="export-name" class="form-control col-12" style="margin-bottom: 20px;" placeholder="Name" >
 						</div>
 						<div class="row">
+							<select style="margin-bottom: 10px;" id="datatype"
+										name="datatype"
+										class="custom-select col-12 custom-select">
+								<option value="" disabled selected>Dateiformat</option>
+								<option value="OSM">OSM</option>
+								<option value="RDF">RDF</option>
+							</select>
+						</div>
+						
+						
+						<div class="row">
 							<button onclick="exportMap()" id="export-button" type="button"
 								class="btn btn-light apply-time col-12">Exportieren</button>
 						</div>
