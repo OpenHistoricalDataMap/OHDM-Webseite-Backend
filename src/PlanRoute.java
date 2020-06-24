@@ -18,6 +18,7 @@ import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  * Servlet implementation class PlanRoute
@@ -38,6 +39,8 @@ public class PlanRoute extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		JSONObject result = new JSONObject();
 		
 		JSONObject jsonRequest = new JSONObject();
 		JSONObject jsonStartPoint = new JSONObject();
@@ -88,7 +91,6 @@ public class PlanRoute extends HttpServlet {
 		jsonRequest.put("day", "2019-9-9");
 		jsonRequest.put("restricted_area", restrictedArea);
 		
-		
 		String timeResult = "42";
 		//HttpPost post = new HttpPost("http://localhost:8080/ohdm");
 		HttpPost post = new HttpPost("http://localhost:5555/ohdm_traveler");
@@ -117,11 +119,14 @@ public class PlanRoute extends HttpServlet {
 			System.err.println("Stream not available.");
 			e.printStackTrace();
 		}
+		System.out.println(timeResult);
 		
+		String jsonString = timeResult;
+		org.json.JSONObject resultObject = new org.json.JSONObject(jsonString);
 		
-		
+		timeResult = resultObject.getString("travel_time");
 	    
-	    request.setAttribute("time", timeResult.substring(16,24)); // This will be available as ${message}
+	    request.setAttribute("time", timeResult); // This will be available as ${message}
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 	
