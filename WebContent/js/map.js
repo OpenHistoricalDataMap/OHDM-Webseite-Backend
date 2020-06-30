@@ -64,9 +64,7 @@ var map = new ol.Map({
 
 
 function moveend(evt) {	
-	console.log(map.getView().calculateExtent(map.getSize()));
 	var coordinates = map.getView().calculateExtent(map.getSize());
-	console.log(coordinates);
 	
 	var coordinatesMax = ol.proj.transform([parseFloat(coordinates[2]), parseFloat(coordinates[3])], 'EPSG:3857', 'EPSG:4326');
 	
