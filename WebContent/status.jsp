@@ -202,22 +202,8 @@
 			</div>
 		</div>
 
-		<div class="content">
-			<div class="list-header">
-				<div class="list-entry" id="name"><p>Name</p></div>
-				<div class="list-entry" id="date"><p>Datum</p></div>
-				<div class="list-entry" id="status"><p>Status</p></div>
-				<div class="list-entry" id="poly-btn-container"> <p>auf Karte anzeigen</p></div>
-			</div>
-			
-			${exportStatus}
-
-			<div class="list-container">
-				<div class="list-entry" id="name"><p>Britain 1200</p></div>
-				<div class="list-entry" id="date"><p>12.04.1248</p></div>
-				<div class="list-entry" id="status"><p>exportiert</p></div>
-				<div class="list-entry" id="poly-btn-container"> <button class="poly-btn">Show Polygon</button> </div>
-			</div>
+		<div id="export-content" class="export-content">
+			<%= request.getSession().getAttribute("exportStatus")  %>
 		</div>
 		
 	

@@ -15,7 +15,6 @@ function exportMap() {
 		if(status == "success"){
 			window.alert("Export erfolgreich in Auftrag gegeben." );
 		}
-		console.log(response);
 	})
 }
 
@@ -23,11 +22,14 @@ function getStatus() {
 	$.post("ExportRequest", {
 		status: "true"
 	}, function(response, status){
-		console.log(response);
-		/*console.log(response.length)
-		for (var i = 0; i < response.length; i++) {
-			let state;
-			switch(resonse.status){
+		window.location.replace("http://localhost:8080/ohdm/status.jsp");
+		/*
+		$(document).ready(function() {
+			let list = '';
+			
+			for (var i = 0; i < response.length; i++) {
+			let state = ' ';
+			switch(response[i].status){
 				case "REQUESTED":
 					state = "Angefragt";
 					break;
@@ -47,16 +49,24 @@ function getStatus() {
 					state = undefined
 					break;
 			}
-			
-			document.querySelector('.content').innerHTML = '<div class="list-container">' + 
-				'<div class="list-entry" id="name"><p>' + response.mapName + '</p></div>' + 
-				'<div class="list-entry" id="date"><p>' + response.date + '</p></div>' +
+			list += ('<div class="list-container">' + 
+				'<div class="list-entry" id="name"><p>' + response[i].mapName + '</p></div>' + 
+				'<div class="list-entry" id="date"><p>' + response[i].date + '</p></div>' +
 				'<div class="list-entry" id="status"><p>' + state + '</p></div>' +
 				'<div class="list-entry" id="poly-btn-container"> <button class="poly-btn"> Herunterladen </button> </div>' +
-			'</div>';
-		}*/
+			'</div>');
+			
+		}
+			$("#export-content").html(list);
+		});*/
+		
+		
+		
+		
+		
+		//$("#export-content").html(
 	})
-	
+	window.location.replace("http://localhost:8080/ohdm/status.jsp");
 }
 
 function buildPoly() {

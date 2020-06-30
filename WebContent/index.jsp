@@ -229,6 +229,7 @@
 			map
 			 -->
 			<div id="map"></div>
+			
 	
 	
 			<!-- <div class="side-menu left-side-menu left-side-menu-open">
@@ -386,7 +387,7 @@
 						<h5>Routenplaner</h5>
 					</div>
 					<div class="side-menu-content">
-						<form action="PlanRoute" method="post"> 
+						<form> 
 							<div class="container">
 								<div class="row">
 									<input type="text" style="margin-bottom: 10px;" onclick="addPoint(true)" id="start" name="start" type="button"
@@ -416,9 +417,7 @@
 									</div>
 	
 								</div>
-								<div class="row">
-									<input type="submit" id="routesubmit" class="btn btn-light apply-time col-12" value="übernehmen" ></input>
-								</div>
+								
 	
 								<div class="row">
 									<p id="route-time"> ${time} </p>
@@ -426,6 +425,9 @@
 	
 							</div>
 						</form>
+						<div class="row">
+									<button onClick="planRoute()" id="routesubmit" class="btn btn-light apply-time col-12" >übernehmen</button>
+								</div>
 					</div>
 				</div>
 	
@@ -492,6 +494,8 @@
 				</div>
 			</div>
 		</div>
+		
+	
 	
 		<!-- JS FILES -->
 		<script src="js/libs/jquery-3.2.1.min.js"></script>
@@ -510,6 +514,7 @@
 		<script src="js/route.js"></script>
 		<script src="js/travelTime.js"></script>
 		<script src="js/export.js"></script>
+		<script src="js/route.js"></script>
 	
 	</body>
 	</html>
