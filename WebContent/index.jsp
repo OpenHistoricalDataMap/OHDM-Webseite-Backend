@@ -21,8 +21,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="css/ol.css" type="text/css">
 	<link rel="stylesheet" href="css/style.css">
-	
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script><!--
+	<!--
 	<script> 
 		console.log('start');
 	
@@ -469,7 +468,7 @@
 							<select style="margin-bottom: 10px;" id="datatype"
 										name="datatype"
 										class="custom-select col-12 custom-select">
-								<option value="" disabled selected>Dateiformat</option>
+								<option value="OSM" disabled selected>Dateiformat</option>
 								<option value="OSM">OSM</option>
 								<option value="RDF">RDF</option>
 							</select>
@@ -485,7 +484,7 @@
 							den <a href="">Android Offline Viewer</a> verfügbar.
 						</div>
 						<div class="row">
-							<button onclick="getStatus()" type="button"
+							<button onclick="toStatus()" type="button"
 								class="btn btn-light apply-time col-12">Bereits
 								exportierte Karten</button>
 						</div>
@@ -514,7 +513,6 @@
 		<script src="js/route.js"></script>
 		<script src="js/travelTime.js"></script>
 		<script src="js/export.js"></script>
-		<script src="js/route.js"></script>
 	
 	</body>
 	</html>

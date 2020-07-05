@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,11 @@ public class ExportRequest extends HttpServlet {
 	}
 
 	/**
+	 * Servlet which is called by export.js gets data from the Website and writes a POST Request to a (private) port. 
+	 * Based on the request parameter status it will either 
+	 * (false) request a new export, which collects a request id or 
+	 * (true) request a list of all exports, this list includes: name, date, state and polygon
+	 * Response is given funneled trough route.js which visualizes the outcome.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -74,9 +80,12 @@ public class ExportRequest extends HttpServlet {
 			System.err.println("Stream not available.");
 			e.printStackTrace();
 		}
-
+		System.out.println(resultID);
+		
+		if (request.getParameter("status").equals("true")) {
+		
 		JSONArray array = new JSONArray(resultID);
-
+		/*
 		String list = "";
 
 		for (var i = 0; i < array.length(); i++) {
@@ -104,15 +113,46 @@ public class ExportRequest extends HttpServlet {
 			list += ("<div class=\"list-container\">" + "<div class=\"list-entry\" id=\"name\"><p>"
 					+ array.getJSONObject(i).getString("mapName") + "</p></div>"
 					+ "<div class=\"list-entry\" id=\"date\"><p>" + array.getJSONObject(i).getString("date")
-					+ "</p></div>" + "<div class=\"list-entry\" id=\"status\"><p>" + state + "</p></div>'"
-					+ "<div class=\"list-entry\" id=\"poly-btn-container\"> <button class=\"poly-btn\"> Herunterladen </button> </div>"
+					+ "</p></div>" + "<div class=\"list-entry\" id=\"status\"><p>" + state + "</p></div>"
+					+ "<div class=\"list-entry\" id=\"poly-btn-container\"> <button onClick=\"getDownload("+array.getJSONObject(i).getString("mapName")+")\" class=\"poly-btn\"> Herunterladen </button> </div>"
 					+ "</div>");
-
+		}*/
 			
+			
+		PrintWriter writer;
+		
+		org.json.JSONObject resultObject = new org.json.JSONObject();
+		resultObject.put("data", array);
+		resultObject.put("status", 200);
+		
+		response.setContentType("application/json");
+		writer = response.getWriter();
+		if(writer != null) {
+			writer.append(resultObject.toString());
+		} else {
+			System.err.println("writer is null");
+		}
+		
+		
+		/*
+		ServletContext context = request.getSession().getServletContext();
+		context.setAttribute("exportStatus", list);
+		request.getRequestDispatcher("status.jsp").forward(request, response);*/
+			
+		} else {
+			PrintWriter writer;
+			
+			response.setStatus(200);
+			response.setContentType("text/string");
+			writer = response.getWriter();
+			if(writer != null) {
+				writer.append(resultID);
+			} else {
+				System.err.println("writer is null");
+			}
 		}
 
-		request.getSession().setAttribute("exportStatus", list);
-		request.getRequestDispatcher("status.jsp").forward(request, response);
+		
 
 	}
 }
