@@ -1,4 +1,5 @@
 # Website for the OpenHistoricalDataMap project 
+## Introduction
 This repository contains all the content of the [OHDM-Website](http://141.45.146.200:8888/ohdm/), such as backend and frontend. To get a rough overview on the features of the project, take a look at the different repositories of this project. 
 
 The main goal for our working group in this semester was to include as many features as possible into the website and to create a ground base for upcoming semesters, which they can use to refine and further develop this website. 
