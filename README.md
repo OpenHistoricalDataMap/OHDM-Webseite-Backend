@@ -6,8 +6,8 @@ The main goal for our working group in this semester was to include as many feat
 
 ## Existing features
 As for now this website can: 
-* display a time sensitive map rendered by [Geoserver](https://github.com/robertd99/GeoserverOHDM/wiki).<br>
-* calculate and show [routes in the last few centuries](https://github.com/OpenHistoricalDataMap/OHDM_Traveler/wiki) for different parameters e.g. farmer - walking or royal person - horse drawn carriage. For further details have a look at [here](https://github.com/OpenHistoricalDataMap/OHDM_Traveler/wiki). <br>
+* display a time sensitive map rendered by [Geoserver](https://github.com/robertd99/GeoserverOHDM/wiki)<br>
+* calculate and show [routes in the last few centuries](https://github.com/OpenHistoricalDataMap/OHDM_Traveler/wiki) for different parameters e.g. farmer - walking or royal person - horse drawn carriage. For further details have a look at [here](https://github.com/OpenHistoricalDataMap/OHDM_Traveler/wiki) <br>
 * export an area on the map, chosen by users, with this simple version of the Export Tool <br><br>
 The [Mapnik Renderer](https://github.com/OpenHistoricalDataMap/Preselected-Rendering/wiki) has its spot on the website, but is yet to be implemented and displayed.
 
