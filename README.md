@@ -19,4 +19,4 @@ If you wish to continue and upgrade our work, you should acquire following techn
 * [Tomcat](https://tomcat.apache.org/download-10.cgi)
 
 ## Deployment 
-[Detailed deployment guide](https://github.com/OpenHistoricalDataMap/OHDM-Webseite-Backend/edit/master/README.md)   
+[Detailed deployment guide](https://github.com/OpenHistoricalDataMap/OHDM-Webseite-Backend/wiki)   
